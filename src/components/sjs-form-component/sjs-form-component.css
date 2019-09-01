@@ -6,8 +6,8 @@ form {
 
 input[type=submit] {
     display: inline-block;
-    background-color: #fe6102;
-    color: white;
+    background-color: var(--input-form-submit-bg-color,#fe6102);
+    color: var(--input-form-submit-color, white);
     font-weight: 500;
     padding: 16px 20px 13px 20px;
     border: none;
@@ -16,18 +16,18 @@ input[type=submit] {
 }
 
 input[type="submit"]:disabled {
-    background-color: #ebebeb;
-    color: black;
+    background-color: var(--input-form-submit-disabled-bg-color,#ebebeb);
+    color: var(--input-form-submit-disabled-color , black);
     cursor: not-allowed;
 }
 
 input[type=submit]:focus, input[type=submit]:hover {
-    background-color: #f69049; 
+    background-color: var(--input-form-submit-hover-bg-color , #f69049);
 }
 
 input[type="submit"]:disabled:hover {
-    background-color: #ebebeb;
-    color: black;
+    background-color:  var(--input-form-submit-disabled-hover-bg-color, #ebebeb);
+    color: var(--input-form-submit-disabled-color, black);
     cursor: not-allowed;
 }
 

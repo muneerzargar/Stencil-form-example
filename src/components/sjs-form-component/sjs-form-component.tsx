@@ -9,7 +9,7 @@ export class SjsFormComponent {
   
   @State() formData: object = {};
   @State() disabledState: boolean = true;
-  @Prop() enableValidation: boolean = false;
+  @Prop() enableValidation: boolean = true;
   @Prop() disableInputFieldGroup: boolean = false;
   @Prop() signValue: string;
   @Prop() formButtonValue: string = 'Submit';
@@ -26,6 +26,7 @@ export class SjsFormComponent {
       this.formData['input'] = e.detail;
     }
     else {
+      // @ts-ignore
       const {input, ...rest} = this.formData;
       this.formData = rest;
     }

@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-  <title>Stencil Component Starter</title>
+  <title>Stencil Form Component</title>
+  <link rel="stylesheet" type="text/css" href="global/variables.css">
   <script type="module" src="/build/sjs-form.esm.js"></script>
   <script nomodule src="/build/sjs-form.js"></script>
   
@@ -12,7 +13,7 @@
 <body>
 
   <sjs-form-component sign-value="€" form-button-value='Transfer' 
-        only-numbers enable-form-validation ></sjs-form-component>
+        only-numbers enable-validation ></sjs-form-component>
 </body>
 <script>
   const formElement = document.querySelector('sjs-form-component');

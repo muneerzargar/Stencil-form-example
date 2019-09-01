@@ -74,11 +74,13 @@ export class SjsFormComponent {
   render() {
     return <div class="inputFieldsGroup">
         <SjsInputSignComponent sign = {this.inputSignValue}/>
+        // @ts-ignore
         <input type="text" id= "mainField" placeholder= '0 ,' 
               maxlength = {this.mainFieldMaxLength} 
               onInput={event => this.onHandleChange(event)} 
               disabled= {this.disableInputFieldGroupFlag}
               onkeypress = {(event: any) => this.onKeyPress(event)}/>
+        // @ts-ignore
         <input type="text" id= "additionalField" 
               placeholder= '00' 
               maxlength = {this.additionalFieldMaxLength} 

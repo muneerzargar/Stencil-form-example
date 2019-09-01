@@ -2,6 +2,7 @@ import { Config } from '@stencil/core';
 
 export const config: Config = {
   namespace: 'sjs-form',
+  globalStyle: 'src/global/variables.css',
   outputTargets: [
     {
       type: 'dist',
