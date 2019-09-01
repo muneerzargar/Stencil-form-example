@@ -10,10 +10,12 @@ export class SjsFormComponent {
   @State() formData: object = {};
   @State() disabledState: boolean = true;
   @Prop() enableValidation: boolean = true;
-  @Prop() disableInputFieldGroup: boolean = false;
+  @Prop({reflect: false}) disableInputFieldGroup: boolean = false;
   @Prop() signValue: string;
   @Prop() formButtonValue: string = 'Submit';
   @Prop() onlyNumbers: boolean;
+  @Prop({reflect: false}) mainInputFieldMaxLength: string;
+  @Prop({reflect: false}) additionalFieldMaxLength: string;
   @Event({
     eventName: 'formSubmitEvent',
     composed: true,
@@ -53,6 +55,8 @@ export class SjsFormComponent {
       onComputedInputValue = {e=> this.onInputChange(e)}
       allowOnlyNumbers={this.onlyNumbers}
       disableInputFieldGroupFlag= {this.disableInputFieldGroup}
+      mainFieldMaxLength= {this.mainInputFieldMaxLength}
+      additionalFieldMaxLength= {this.additionalFieldMaxLength}
       ></sjs-input-component>
     <input type="submit" value={this.formButtonValue}  disabled = {this.disabledState}/>
   </form>;

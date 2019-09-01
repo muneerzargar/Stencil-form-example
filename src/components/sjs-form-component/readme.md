@@ -7,13 +7,15 @@
 
 ## Properties
 
-| Property                 | Attribute                   | Description | Type      | Default     |
-| ------------------------ | --------------------------- | ----------- | --------- | ----------- |
-| `disableInputFieldGroup` | `disable-input-field-group` |             | `boolean` | `false`     |
-| `enableValidation`       | `enable-validation`         |             | `boolean` | `true`      |
-| `formButtonValue`        | `form-button-value`         |             | `string`  | `'Submit'`  |
-| `onlyNumbers`            | `only-numbers`              |             | `boolean` | `undefined` |
-| `signValue`              | `sign-value`                |             | `string`  | `undefined` |
+| Property                   | Attribute                     | Description | Type      | Default     |
+| -------------------------- | ----------------------------- | ----------- | --------- | ----------- |
+| `additionalFieldMaxLength` | `additional-field-max-length` |             | `string`  | `undefined` |
+| `disableInputFieldGroup`   | `disable-input-field-group`   |             | `boolean` | `false`     |
+| `enableValidation`         | `enable-validation`           |             | `boolean` | `true`      |
+| `formButtonValue`          | `form-button-value`           |             | `string`  | `'Submit'`  |
+| `mainInputFieldMaxLength`  | `main-input-field-max-length` |             | `string`  | `undefined` |
+| `onlyNumbers`              | `only-numbers`                |             | `boolean` | `undefined` |
+| `signValue`                | `sign-value`                  |             | `string`  | `undefined` |
 
 
 ## Events

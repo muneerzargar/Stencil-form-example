@@ -10,9 +10,11 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface SjsFormComponent {
+    'additionalFieldMaxLength': string;
     'disableInputFieldGroup': boolean;
     'enableValidation': boolean;
     'formButtonValue': string;
+    'mainInputFieldMaxLength': string;
     'onlyNumbers': boolean;
     'signValue': string;
   }
@@ -47,9 +49,11 @@ declare global {
 
 declare namespace LocalJSX {
   interface SjsFormComponent extends JSXBase.HTMLAttributes<HTMLSjsFormComponentElement> {
+    'additionalFieldMaxLength'?: string;
     'disableInputFieldGroup'?: boolean;
     'enableValidation'?: boolean;
     'formButtonValue'?: string;
+    'mainInputFieldMaxLength'?: string;
     'onFormSubmitEvent'?: (event: CustomEvent<any>) => void;
     'onlyNumbers'?: boolean;
     'signValue'?: string;
