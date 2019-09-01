@@ -1,7 +1,7 @@
 :root {
     --input-form-submit-bg-color : #fe6102;
     --input-form-submit-color : #ffffff;
-    --input-form-submit-disabled-bg-color : red;
+    --input-form-submit-disabled-bg-color : #ebebeb;
     --input-form-submit-disabled-color : #000000;
     --input-form-submit-hover-bg-color : #f69049;
     --input-form-submit-disabled-hover-bg-color : #ebebeb;
