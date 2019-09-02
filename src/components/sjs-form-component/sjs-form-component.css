@@ -29,6 +29,12 @@ input[type="submit"]:disabled:hover {
     cursor: not-allowed;
 }
 
+.error {
+    color: red;
+    display: block;
+    margin: 5px;
+}
+
 /* This applies from 540px onwards*/
 @media (max-width: 540px) {
     sjs-input-component > div > input {

@@ -14,6 +14,7 @@ export namespace Components {
     'disableInputFieldGroup': boolean;
     'enableValidation': boolean;
     'formButtonValue': string;
+    'formErrorMessage': string;
     'mainInputFieldMaxLength': string;
     'onlyNumbers': boolean;
     'signValue': string;
@@ -53,6 +54,7 @@ declare namespace LocalJSX {
     'disableInputFieldGroup'?: boolean;
     'enableValidation'?: boolean;
     'formButtonValue'?: string;
+    'formErrorMessage'?: string;
     'mainInputFieldMaxLength'?: string;
     'onFormSubmitEvent'?: (event: CustomEvent<any>) => void;
     'onlyNumbers'?: boolean;

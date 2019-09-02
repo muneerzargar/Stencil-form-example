@@ -12,6 +12,7 @@ export class SjsFormComponent {
   @Prop() enableValidation: boolean = true;
   @Prop({reflect: false}) disableInputFieldGroup: boolean = false;
   @Prop() signValue: string;
+  @Prop() formErrorMessage: string;
   @Prop() formButtonValue: string = 'Submit';
   @Prop() onlyNumbers: boolean;
   @Prop({reflect: false}) mainInputFieldMaxLength: string;
@@ -24,7 +25,7 @@ export class SjsFormComponent {
   }) onFormSubmitHandler: EventEmitter;
 
   onInputChange(e: CustomEvent<any>) {
-    if(e.detail !== '') {
+    if(!isNaN(e.detail) && e.detail !== '0.00') {
       this.formData['input'] = e.detail;
     }
     else {
@@ -51,6 +52,12 @@ export class SjsFormComponent {
 
   render() {
     return <form onSubmit={(e: any) => this.handleSubmit(e)}>
+      {//<!-- Error can be moved to separate component -->
+      }
+      {this.disabledState ? 
+        <strong class='error'>{this.formErrorMessage}</strong> :
+        null
+      }
       <sjs-input-component input-sign-value = {this.signValue}  
       onComputedInputValue = {e=> this.onInputChange(e)}
       allowOnlyNumbers={this.onlyNumbers}

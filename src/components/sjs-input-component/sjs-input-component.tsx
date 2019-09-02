@@ -14,7 +14,7 @@ export class SjsFormComponent {
   @Prop() inputSignValue: string;
   @Prop() allowOnlyNumbers: boolean = true;
   @Prop() disableInputFieldGroupFlag: boolean;
-  @Prop({reflect: false}) mainFieldMaxLength: string = '6';
+  @Prop({reflect: false}) mainFieldMaxLength: string = '8';
   @Prop({reflect: false}) additionalFieldMaxLength: string = '2'
 
    @Event({
@@ -33,7 +33,7 @@ export class SjsFormComponent {
   onHandleChange(event : any) {
     switch(event.target.id) {
         case 'mainField' : {
-            this.mainFieldValue = event.target.value;
+            this.mainFieldValue = (event.target.value!== '') ? parseFloat(event.target.value).toString() : '';
             break;
         }
         case 'additionalField' : {
@@ -56,7 +56,7 @@ export class SjsFormComponent {
     let computedValue = '';
 
     if(mainFieldValue) {
-      computedValue = `${mainFieldValue}.00`;
+      computedValue = mainFieldValue;
     }
 
     if(additionalFieldValue) {
@@ -67,7 +67,7 @@ export class SjsFormComponent {
       computedValue = `${mainFieldValue}.${additionalFieldValue}`
     }
 
-    return computedValue;
+    return parseFloat(computedValue).toFixed(2);
 
   }
 
@@ -76,6 +76,7 @@ export class SjsFormComponent {
         <SjsInputSignComponent sign = {this.inputSignValue}/>
         <input type="text" id= "mainField" placeholder= '0 ,' 
               maxlength = {this.mainFieldMaxLength} 
+              value= {this.mainFieldValue}
               onInput={event => this.onHandleChange(event)} 
               disabled= {this.disableInputFieldGroupFlag}
               onkeypress = {(event: any) => this.onKeyPress(event)}/>
