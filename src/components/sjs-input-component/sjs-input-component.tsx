@@ -9,10 +9,11 @@ import { SjsInputSignComponent } from '../sjs-input-sign-component/sjs-input-sig
 })
 export class SjsFormComponent {
   
-  @State() mainFieldValue: string;
-  @State() additionalFieldValue: string;
+  @State() mainField: object = {};
+  @State() additionalField: object = {};
   @Prop() inputSignValue: string;
   @Prop() allowOnlyNumbers: boolean = true;
+  @Prop() enableInputRequiredValidation: boolean = true;
   @Prop() disableInputFieldGroupFlag: boolean;
   @Prop({reflect: false}) mainFieldMaxLength: string = '8';
   @Prop({reflect: false}) additionalFieldMaxLength: string = '2'
@@ -26,48 +27,74 @@ export class SjsFormComponent {
   }) computedInputValue: EventEmitter;
 
   componentWillUpdate() {
-    const combinedValue = this.getCombinedValue(this.mainFieldValue, this.additionalFieldValue);
-    this.computedInputValue.emit(combinedValue); 
+    const computedResult = {
+      // @ts-ignore
+      value: this.getCombinedValue(this.mainField.value, this.additionalField.value),
+      // @ts-ignore
+      isValid: this.mainField.isValid
+    }
+    this.computedInputValue.emit(computedResult); 
      
   }
 
   onHandleChange(event : any) {
-    switch(event.target.id) {
-        case 'mainField' : {
-            this.mainFieldValue = (event.target.value!== '') ? parseFloat(event.target.value).toString() : '';
-            break;
+    const {target} = event;
+    const value = target.value.replace(/,/g,'');
+    switch(target.id) {
+      case 'mainField' : {
+        const mainField = {
+          value : (value !== '' && !isNaN(parseFloat(value)) ) ? parseFloat(value).toString() : null,
+          isValid: target.validity.valid
         }
-        case 'additionalField' : {
-            this.additionalFieldValue = event.target.value;
-            break;
-        }
-        default: {
-            break;
-        }
+        this.mainField = {...mainField};
+        break;
+      }   
+      case 'additionalField' : {
+        const additionalField = {
+          value : event.target.value,
+          isValid: event.target.validity.valid
+        };
+        this.additionalField = {...additionalField};
+        break;
+      }
+      default: {
+          break;
+      }
     }
   }
 
   onKeyPress(evt: any) {
     if(this.allowOnlyNumbers) {
-      return /^[0-9]*$/.test(evt.key);
+      const {key, target} = evt;
+      if((key === ',' || key === '.') && target.id === 'mainField') {
+        target.nextElementSibling.focus();
+      }
+      return /^[0-9]*$/.test(key);
     }
   }
+
+  onBlurEvent() {
+    const obj = {...this.mainField};
+    // @ts-ignore
+    if(obj.value && obj.value.indexOf(',')=== -1) {
+      obj.value += ',';
+    }
+    this.mainField = {...obj};
+  }
   
-  getCombinedValue = (mainFieldValue: string, additionalFieldValue: string) => {
+  getCombinedValue = (mainField: string, additionalField: string) => {
     let computedValue = '';
 
-    if(mainFieldValue) {
-      computedValue = mainFieldValue;
+    if(mainField && additionalField) {
+      computedValue = `${mainField}.${additionalField}`
     }
-
-    if(additionalFieldValue) {
-      computedValue = `0.${additionalFieldValue}`;
+    else if(mainField) {
+      computedValue = mainField;
     }
-
-    if(mainFieldValue && additionalFieldValue) {
-      computedValue = `${mainFieldValue}.${additionalFieldValue}`
+    else if(additionalField) {
+      computedValue = `0.${additionalField}`;
     }
-
+    
     return parseFloat(computedValue).toFixed(this.decimalPosition);
 
   }
@@ -77,10 +104,13 @@ export class SjsFormComponent {
         <SjsInputSignComponent sign = {this.inputSignValue}/>
         <input type="text" id= "mainField" placeholder= '0 ,' 
               maxlength = {this.mainFieldMaxLength} 
-              value= {this.mainFieldValue}
+              value= {this.mainField.value}
               onInput={event => this.onHandleChange(event)} 
               disabled= {this.disableInputFieldGroupFlag}
-              onkeypress = {(event: any) => this.onKeyPress(event)}/>
+              required= {this.enableInputRequiredValidation}
+              onkeypress = {(event: any) => this.onKeyPress(event)}
+              onBlur= {() => this.onBlurEvent()}
+              />
         <input type="text" id= "additionalField" 
               placeholder= '00' 
               maxlength = {this.additionalFieldMaxLength} 

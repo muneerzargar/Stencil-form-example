@@ -24,6 +24,7 @@ export namespace Components {
     'allowOnlyNumbers': boolean;
     'decimalPosition': number;
     'disableInputFieldGroupFlag': boolean;
+    'enableInputRequiredValidation': boolean;
     'inputSignValue': string;
     'mainFieldMaxLength': string;
   }
@@ -66,6 +67,7 @@ declare namespace LocalJSX {
     'allowOnlyNumbers'?: boolean;
     'decimalPosition'?: number;
     'disableInputFieldGroupFlag'?: boolean;
+    'enableInputRequiredValidation'?: boolean;
     'inputSignValue'?: string;
     'mainFieldMaxLength'?: string;
     'onComputedInputValue'?: (event: CustomEvent<any>) => void;

@@ -17,7 +17,7 @@
   "scripts": {
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
+    "test": "stencil test --spec",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
   },
@@ -26,6 +26,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@types/jest": "^24.0.18"
+    "@types/jest": "^24.0.18",
+    "@types/mocha": "^5.2.7",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0"
   }
 }

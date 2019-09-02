@@ -8,7 +8,7 @@ import { Component, Prop, Event, State, h, EventEmitter } from '@stencil/core';
 export class SjsFormComponent {
   
   @State() formData: object = {};
-  @State() disabledState: boolean = true;
+  @State() disabledState: boolean = false;
   @Prop() enableValidation: boolean = true;
   @Prop({reflect: false}) disableInputFieldGroup: boolean = false;
   @Prop() signValue: string;
@@ -25,13 +25,19 @@ export class SjsFormComponent {
   }) onFormSubmitHandler: EventEmitter;
 
   onInputChange(e: CustomEvent<any>) {
-    if(!isNaN(e.detail) && e.detail !== '0.00') {
-      this.formData['input'] = e.detail;
-    }
-    else {
+    // @ts-ignore
+    if(e.target.id) {
       // @ts-ignore
-      const {input, ...rest} = this.formData;
-      this.formData = rest;
+      const {id} = e.target;
+      const {detail} = e;
+      if(!isNaN(detail.value) && detail.value !== '0.00') {
+        this.formData[id] = e.detail;
+      }
+      else {
+        // @ts-ignore
+        const {[id]: removedKey, ...rest} = this.formData;
+        this.formData = rest;
+      }
     }
     this.formValidator();
   }
@@ -43,7 +49,8 @@ export class SjsFormComponent {
 
   formValidator() {
     if(this.enableValidation) {
-      this.disabledState = (Object.entries(this.formData).length === 0 && this.formData.constructor === Object);
+      // TODO: Add  validation for isValid of the component.
+      this.disabledState = ((Object.entries(this.formData).length === 0 && this.formData.constructor === Object));
     }
     else {
       this.disabledState = false;
@@ -58,7 +65,7 @@ export class SjsFormComponent {
         <strong class='error'>{this.formErrorMessage}</strong> :
         null
       }
-      <sjs-input-component input-sign-value = {this.signValue}  
+      <sjs-input-component id = "amountInput" input-sign-value = {this.signValue}  
       onComputedInputValue = {e=> this.onInputChange(e)}
       allowOnlyNumbers={this.onlyNumbers}
       disableInputFieldGroupFlag= {this.disableInputFieldGroup}
