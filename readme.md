@@ -43,30 +43,16 @@ To run the unit tests for the components, run:
 npm test
 ```
 
-Need help? Check out our docs [here](https://stenciljs.com/docs/my-first-component).
+## Component Description
+The component is developed using Html, Css, Stenciljs. The structure is divided into multiple components listed as sjs-form-component, sjs-input-component and sjs-input-sign-component where <b>SJS</b> stands for stencil js. 
 
+-   sjs-form-component renders the form and dspatchs an event on the click of the button. The button is enabled only on the successful validation of the input fields. The form is valid when the input is greater than '0.00'. This can be further extended with the inclusion of the multiple components. <i>Alternative</i> - Form to support slots, such that the end user of the component is able to pass child elements in the component.
 
-## Naming Components
+- sjs-input-sign is an attempt to create an functional component. Such components can be used to render the markup, component does not cater to lifecycle hooks for more information <a href="https://stenciljs.com/docs/functional-components"> Functional components with Stencil </a>
 
-When creating new component tags, we recommend _not_ using `stencil` in the component name (ex: `<stencil-datepicker>`). This is because the generated component has little to nothing to do with Stencil; it's just a web component!
+- sjs-input-component renders multiple user input fields and is responsible for the validation of the input fields such that it accepts only numeric values (this is based on the passed property allowOnlyNumbers). The Values are combined in this component and an event "computedInputValue" is dispatched from the component which is listened at the parent component in this case form component within JSX template.
 
-Instead, use a prefix that fits your company or any name for a group of related components. For example, all of the Ionic generated web components use the prefix `ion`.
+## Further Additions
 
-
-## Using this component
-
-### Script tag
-
-- [Publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages)
-- Put a script tag similar to this `<script src='https://unpkg.com/my-component@0.0.1/dist/mycomponent.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### Node Modules
-- Run `npm install my-component --save`
-- Put a script tag similar to this `<script src='node_modules/my-component/dist/mycomponent.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### In a stencil-starter app
-- Run `npm install my-component --save`
-- Add an import to the npm packages `import my-component;`
-- Then you can use the element anywhere in your template, JSX, html etc
+- Addition of tests.
+- Fixing the errors/warnings given by tsx/ts.

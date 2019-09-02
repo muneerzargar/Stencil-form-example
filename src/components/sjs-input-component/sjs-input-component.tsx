@@ -16,6 +16,7 @@ export class SjsFormComponent {
   @Prop() disableInputFieldGroupFlag: boolean;
   @Prop({reflect: false}) mainFieldMaxLength: string = '8';
   @Prop({reflect: false}) additionalFieldMaxLength: string = '2'
+  @Prop({reflect: false}) decimalPosition: number = 2
 
    @Event({
     eventName: 'computedInputValue',
@@ -67,7 +68,7 @@ export class SjsFormComponent {
       computedValue = `${mainFieldValue}.${additionalFieldValue}`
     }
 
-    return parseFloat(computedValue).toFixed(2);
+    return parseFloat(computedValue).toFixed(this.decimalPosition);
 
   }
 

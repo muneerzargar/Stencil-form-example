@@ -22,6 +22,7 @@ export namespace Components {
   interface SjsInputComponent {
     'additionalFieldMaxLength': string;
     'allowOnlyNumbers': boolean;
+    'decimalPosition': number;
     'disableInputFieldGroupFlag': boolean;
     'inputSignValue': string;
     'mainFieldMaxLength': string;
@@ -63,6 +64,7 @@ declare namespace LocalJSX {
   interface SjsInputComponent extends JSXBase.HTMLAttributes<HTMLSjsInputComponentElement> {
     'additionalFieldMaxLength'?: string;
     'allowOnlyNumbers'?: boolean;
+    'decimalPosition'?: number;
     'disableInputFieldGroupFlag'?: boolean;
     'inputSignValue'?: string;
     'mainFieldMaxLength'?: string;
