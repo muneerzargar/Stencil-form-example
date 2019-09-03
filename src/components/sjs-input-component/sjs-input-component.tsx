@@ -4,8 +4,8 @@ import { SjsInputSignComponent } from '../sjs-input-sign-component/sjs-input-sig
 @Component({
   tag: 'sjs-input-component',
   styleUrl: 'sjs-input-component.css',
-  scoped: true,
-  shadow: false,
+  scoped: false,
+  shadow: true,
 })
 export class SjsFormComponent {
   

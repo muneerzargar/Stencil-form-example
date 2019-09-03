@@ -6,7 +6,7 @@
     position: relative;
 }
 
- input {
+ :host input {
     border: 1px solid  var(--input-form-type-text-border-color, #525199);
     border-radius: 4px;
     font-size: 18px;
@@ -14,11 +14,11 @@
     margin: 5px;
     text-align: right; 
 }
- input:focus {
+ :host input:focus {
     outline: var(--input-form-type-text-focus-color, #cbcae0) auto 5px;
 }
 
-strong {
+:host strong {
     font-size: x-large;
     color: #757575;
     position: absolute;
