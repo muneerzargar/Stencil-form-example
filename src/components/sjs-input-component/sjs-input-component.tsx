@@ -43,7 +43,7 @@ export class SjsFormComponent {
     switch(target.id) {
       case 'mainField' : {
         const mainField = {
-          value : (value !== '' && !isNaN(parseFloat(value)) ) ? parseFloat(value).toString() : null,
+          value : (value !== '') ? parseFloat(value).toString() : '',
           isValid: target.validity.valid
         }
         this.mainField = {...mainField};
@@ -73,7 +73,8 @@ export class SjsFormComponent {
     }
   }
 
-  onBlurEvent() {
+  onBlurEvent(e: any) {
+    e.preventDefault();
     const obj = {...this.mainField};
     // @ts-ignore
     if(obj.value && obj.value.indexOf(',')=== -1) {
@@ -84,7 +85,7 @@ export class SjsFormComponent {
   
   getCombinedValue = (mainField: string, additionalField: string) => {
     let computedValue = '';
-
+    mainField = mainField ? mainField.replace(/,/g,'') : mainField;
     if(mainField && additionalField) {
       computedValue = `${mainField}.${additionalField}`
     }
@@ -95,7 +96,7 @@ export class SjsFormComponent {
       computedValue = `0.${additionalField}`;
     }
     
-    return parseFloat(computedValue).toFixed(this.decimalPosition);
+    return (computedValue !== '') ? parseFloat(computedValue).toFixed(this.decimalPosition) : '';
 
   }
 
@@ -109,7 +110,7 @@ export class SjsFormComponent {
               disabled= {this.disableInputFieldGroupFlag}
               required= {this.enableInputRequiredValidation}
               onkeypress = {(event: any) => this.onKeyPress(event)}
-              onBlur= {() => this.onBlurEvent()}
+              onBlur= {(e:any) => this.onBlurEvent(e)}
               />
         <input type="text" id= "additionalField" 
               placeholder= '00' 

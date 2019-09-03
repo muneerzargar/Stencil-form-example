@@ -54,5 +54,4 @@ The component is developed using Html, Css, Stenciljs. The structure is divided 
 
 ## Further Additions
 
-- Addition of tests.
 - Fixing the errors/warnings given by tsx/ts.

@@ -1,4 +1,5 @@
 import { Component, Prop, Event, State, h, EventEmitter } from '@stencil/core';
+import { setMaxListeners } from 'cluster';
 
 @Component({
   tag: 'sjs-form-component',
@@ -26,11 +27,10 @@ export class SjsFormComponent {
 
   onInputChange(e: CustomEvent<any>) {
     // @ts-ignore
-    if(e.target.id) {
-      // @ts-ignore
-      const {id} = e.target;
+    const {id} = e.target;
+    if(id) {
       const {detail} = e;
-      if(!isNaN(detail.value) && detail.value !== '0.00') {
+      if( detail && detail.value && detail.value !== '' && detail.value !== '0.00') {
         this.formData[id] = e.detail;
       }
       else {
@@ -39,7 +39,7 @@ export class SjsFormComponent {
         this.formData = rest;
       }
     }
-    this.formValidator();
+    this.formValidator(id);
   }
 
   handleSubmit(e: any) {
@@ -47,10 +47,9 @@ export class SjsFormComponent {
     this.onFormSubmitHandler.emit(this.formData);
   }
 
-  formValidator() {
+  formValidator(keyToFind: any) {
     if(this.enableValidation) {
-      // TODO: Add  validation for isValid of the component.
-      this.disabledState = ((Object.entries(this.formData).length === 0 && this.formData.constructor === Object));
+      this.disabledState = (this.formData[keyToFind] === undefined || !this.formData[keyToFind]['isValid']);
     }
     else {
       this.disabledState = false;
