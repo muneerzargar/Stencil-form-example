@@ -1,16 +1,22 @@
 import { Component, Prop, Event, EventEmitter, State, h } from '@stencil/core';
 import { SjsInputSignComponent } from '../sjs-input-sign-component/sjs-input-sign-component';
 
+interface inputValueType {
+  value: string,
+  isValid: boolean
+}
+
 @Component({
   tag: 'sjs-input-component',
   styleUrl: 'sjs-input-component.css',
   scoped: false,
   shadow: true,
 })
+
 export class SjsFormComponent {
   
-  @State() mainField: object = {};
-  @State() additionalField: object = {};
+  @State() mainField: inputValueType = {value: '', isValid: false};
+  @State() additionalField: inputValueType = {value: '', isValid: false};
   @Prop() inputSignValue: string;
   @Prop() allowOnlyNumbers: boolean = true;
   @Prop() enableInputRequiredValidation: boolean = true;
@@ -43,7 +49,7 @@ export class SjsFormComponent {
     switch(target.id) {
       case 'mainField' : {
         const mainField = {
-          value : (value !== '') ? parseFloat(value).toString() : '',
+          value : value,
           isValid: target.validity.valid
         }
         this.mainField = {...mainField};
@@ -73,10 +79,11 @@ export class SjsFormComponent {
     }
   }
 
+
   onBlurEvent(e: any) {
     e.preventDefault();
     const obj = {...this.mainField};
-    // @ts-ignore
+   
     if(obj.value && obj.value.indexOf(',')=== -1) {
       obj.value += ',';
     }
@@ -96,7 +103,7 @@ export class SjsFormComponent {
       computedValue = `0.${additionalField}`;
     }
     
-    return (computedValue !== '') ? parseFloat(computedValue).toFixed(this.decimalPosition) : '';
+    return computedValue;
 
   }
 

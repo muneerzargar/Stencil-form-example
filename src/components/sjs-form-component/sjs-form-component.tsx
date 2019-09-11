@@ -1,5 +1,4 @@
 import { Component, Prop, Event, State, h, EventEmitter } from '@stencil/core';
-import { setMaxListeners } from 'cluster';
 
 @Component({
   tag: 'sjs-form-component',
@@ -26,7 +25,7 @@ export class SjsFormComponent {
   }) onFormSubmitHandler: EventEmitter;
 
   onInputChange(e: CustomEvent<any>) {
-    // @ts-ignore
+   
     const {id} = e.target;
     if(id) {
       const {detail} = e;
